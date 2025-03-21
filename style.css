@@ -1,0 +1,603 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+     'Open Sans', 'Helvetica Neue', sans-serif;
+     background-color: #050215; /* Darker blue-black for space */
+     color: #e7e7e7;
+     min-height: 100vh;
+     line-height: 1.5;
+     position: relative;
+     overflow-x: hidden;
+}
+
+/* Stars background with faster animation */
+@keyframes movingStars {
+    from {
+        background-position: 0 0, 40px 60px, 130px 270px;
+    }
+    to {
+        background-position: 550px 550px, 390px 610px, 480px 820px;
+    }
+}
+
+/* Space background elements with more stars */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 1px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 1px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 80px 170px;
+    z-index: -2;
+    animation: movingStars 30s linear infinite; /* Faster animation (30s instead of 90s) */
+}
+
+/* Second layer of stars moving in different direction */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 1px, transparent 1px),
+        radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 1px);
+    background-size: 200px 200px, 300px 300px;
+    background-position: 0 0, 150px 150px;
+    z-index: -2;
+    animation: movingStarsAlt 20s linear infinite;
+}
+
+@keyframes movingStarsAlt {
+    from {
+        background-position: 0 0, 150px 150px;
+    }
+    to {
+        background-position: 200px -200px, 350px -50px;
+    }
+}
+
+/* Shooting stars with faster animation */
+@keyframes shootingStar {
+    0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-500px) translateY(500px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.shooting-star {
+    position: absolute;
+    width: 100px;
+    height: 1px;
+    /* background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1) 60%, rgba(70,131,255,0.6)); */
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    filter: drop-shadow(0 0 2px white);
+    animation: shootingStar 4s linear infinite; /* Faster shooting stars (4s instead of 6s) */
+}
+
+.shooting-star:nth-child(1) {
+    top: 20%;
+    right: 10%;
+    animation-delay: 0.5s;
+}
+
+.shooting-star:nth-child(2) {
+    top: 10%;
+    right: 30%;
+    animation-delay: 2s;
+}
+
+.shooting-star:nth-child(3) {
+    top: 40%;
+    right: 20%;
+    animation-delay: 3.5s;
+}
+
+.shooting-star:nth-child(4) {
+    top: 15%;
+    right: 40%;
+    animation-delay: 1s;
+}
+
+.shooting-star:nth-child(5) {
+    top: 30%;
+    right: 15%;
+    animation-delay: 2.7s;
+}
+
+/* Galaxy nebula effect */
+.image-gradient {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.3;
+    z-index: -1;
+    /* background: radial-gradient(
+        circle at 80% 20%,
+        rgba(111, 63, 219, 0.4) 0%,
+        rgba(47, 16, 107, 0.2) 40%,
+        transparent 70%
+    ); */
+    width: 100%;
+    height: 100%;
+}
+
+/* Star glow effect */
+.layer-blur {
+    height: 0;
+    width: 30rem;
+    position: absolute;
+    top: 20%;
+    right: 0;
+    box-shadow: 0 0 700px 15px rgba(173, 216, 230, 0.6);
+    rotate: -30deg;
+    z-index: -1;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-left: -5%;
+}
+
+nav a {
+    font-size: 1rem;
+    letter-spacing: .1rem;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    z-index: 999;
+}
+
+nav a:hover {
+    color: #a7a7a7;
+}
+
+.btn-signing {
+    background-color: #a7a7a7;
+    color: #000;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    letter-spacing: 0.09em ;
+    border: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.btn-signing:hover {
+    background-color: white;   
+}
+
+/* main content */
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(90vh - 6rem);
+}
+
+.content {
+    max-width: 40rem;
+    margin-left: 10%;
+    z-index: 999;
+}
+
+.tag-box {
+    position: relative;
+    width: 18rem;
+    height: 2.5rem;
+    border-radius: 50px;
+    background: linear-gradient(to right, #656565, #7f42a7, #6600c5,
+    #5300a0, #757575, #656565);
+    background-size: 200%;
+    animation: animationGradient 2.5s linear infinite;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes animationGradient {
+    to {
+        background-position: 200%;
+    }
+}
+
+.tag-box .tag {
+    position: absolute;
+    inset: 3px 3px 3px 3px;
+    background-color: #050215; /* Match body background */
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.tag-box .tag:hover {
+    color: #5300a0;
+}
+
+.content h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin: 2rem 0;
+    line-height: 1.2;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.7); /* Purple glow for space theme */
+}
+
+.description {
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    max-width: 35rem;
+    color: #a9a9d9; /* Light purple-gray for space theme */
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.btn-get-started {
+    text-decoration: none;
+    border: 1px solid #514980; /* Purple border */
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    transition: background-color 0.2s ease;
+    color: #e7e7e7;
+}
+
+.btn-get-started:hover {
+    background-color: rgba(83, 0, 160, 0.3); /* Semi-transparent purple */
+}
+
+.btn-signing-main {
+    text-decoration: none;
+    background-color: #a7a7a7;
+    color: black;
+    padding: 0.6rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    transition: background-color 0.2s ease;
+}
+
+.btn-signing-main:hover {
+    background-color: white;
+}
+
+.robot-3d {
+    position: absolute;
+    top: 0;
+    right: -20%;   
+}
+
+/* Add floating animation for space objects */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Add subtle pulsing stars */
+@keyframes pulse {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+/* Add a few floating planets */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    animation: float 15s infinite ease-in-out;
+}
+
+.planet-1 {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #6b45a0, #1a0b3b);
+    top: 15%;
+    right: 10%;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+    animation-delay: 1s;
+}
+
+.planet-2 {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 30% 30%, #4a8fe7, #102b51);
+    bottom: 20%;
+    right: 25%;
+    box-shadow: 0 0 15px rgba(73, 143, 231, 0.4);
+    animation-delay: 2s;
+}
+
+/* Add twinkling effect for some stars with faster animation */
+@keyframes twinkle {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    z-index: -1;
+    animation: twinkle 1.5s infinite ease-in-out; /* Faster twinkling (1.5s instead of 3s) */
+}
+
+.star-1 {
+    width: 2px;
+    height: 2px;
+    top: 15%;
+    left: 10%;
+    box-shadow: 0 0 3px 1px white;
+    animation-delay: 0.2s;
+}
+
+.star-2 {
+    width: 3px;
+    height: 3px;
+    top: 25%;
+    left: 25%;
+    box-shadow: 0 0 4px 1px white;
+    animation-delay: 0.7s;
+}
+
+.star-3 {
+    width: 2px;
+    height: 2px;
+    top: 35%;
+    left: 15%;
+    box-shadow: 0 0 3px 1px white;
+    animation-delay: 1.2s;
+}
+
+.star-4 {
+    width: 2px;
+    height: 2px;
+    top: 20%;
+    left: 30%;
+    box-shadow: 0 0 3px 1px white;
+    animation-delay: 0.3s;
+}
+
+.star-5 {
+    width: 3px;
+    height: 3px;
+    top: 40%;
+    left: 20%;
+    box-shadow: 0 0 4px 1px white;
+    animation-delay: 0.9s;
+}
+
+.star-6 {
+    width: 2px;
+    height: 2px;
+    top: 10%;
+    left: 40%;
+    box-shadow: 0 0 3px 1px white;
+    animation-delay: 0.5s;
+}
+
+.star-7 {
+    width: 2px;
+    height: 2px;
+    top: 30%;
+    left: 35%;
+    box-shadow: 0 0 3px 1px white;
+    animation-delay: 1.1s;
+}
+
+.star-8 {
+    width: 3px;
+    height: 3px;
+    top: 5%;
+    left: 5%;
+    box-shadow: 0 0 4px 1px white;
+    animation-delay: 0.4s;
+}
+
+
+
+/* responsiveness */
+@media (max-width: 1300px) {
+    header{
+        padding: 1rem 0.5rem;
+    }
+
+    .content{
+        margin-top: 85%;
+    }
+    .robot-3d{
+        scale:0.8;
+        top: -20%;
+        right:2%;
+    }
+}
+
+@media (max-width: 768px) {
+    header{
+        padding: 1rem 0.1rem;
+    }
+
+    nav{
+        display: none;
+    }
+
+    header h1{
+        font-size: 2rem;
+    }
+
+    .btn-signing{
+        padding: 0.6rem 1.5rem;
+    }
+
+    .content{
+        margin-top: 25rem;
+    }
+
+    .robot-3d{
+        scale:0.5;
+        top: -25%;
+        right: 0;
+    }
+
+    .content{
+        max-width: 30rem;
+        margin-left: 10%;
+    }
+
+    .tag-box{
+        width:12rem;
+    }
+
+    .content h1{
+        font-size:2.5rem;
+    }
+
+    .description{
+        font-size: 1rem;
+    }
+
+    .btn-get-started{
+        font-size: 0.8rem;
+        padding: 0.8rem 1.2rem;
+    }
+
+    .btn-signing-main{
+        font-size: 0.8rem;
+        padding:0.8rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .btn-signing {
+        padding: 0.5rem 1rem;
+    }
+
+    .content {
+        margin-top: 20rem;
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    .robot-3d {
+        scale: 0.4;
+        top: -30%;
+        right: 0;
+    }
+
+    .tag-box {
+        width: 10rem;
+    }
+
+    .content h1 {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .btn-get-started,
+    .btn-signing-main {
+        font-size: 0.7rem;
+        padding: 0.6rem 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .content h1 {
+        font-size: 1.8rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .btn-get-started,
+    .btn-signing-main {
+        font-size: 0.6rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
